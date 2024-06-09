@@ -1,0 +1,417 @@
+/* styling for the entire app */
+.app {
+  text-align: center;
+}
+
+/* creation of variables for the colours and fonts used throughout the webpage */
+:root {
+  --backgroundColor: #FAFAFB;
+  --primaryBlue: #1E6FEC;
+  --primaryTextColor: #FFF;
+  --secondaryTextColor: #1E6FEC;
+  --shadowColor: #4A88E9;
+  --textAreaColor: #494949;
+  --textAreaBackground: #F6F9FF;
+  font-family: 'Monsteratt', sans-serif;
+}
+
+/* removing margins around the entire webpage */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--backgroundColor);
+}
+
+
+/* styling created for the container of the webpages elements */
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr 2.5fr 0.5fr 0.5fr;
+  grid-template-columns: 0.5fr 2.5fr 1fr 2.5fr 0.5fr;
+  grid-template-areas:
+    "header header header header header"
+    ". langList1 switchButton langList2 ."
+    ". beforeArea . afterArea ."
+    ". . translateButton . ."
+    "footer footer footer footer footer";
+}
+
+/* header styling */
+.navbar {
+  grid-area: header;
+  padding: 10px;
+  position: fixed;
+  width: 100%;
+  margin: 0;
+  border: 0;
+  font-size: 1.5rem;
+  color: var(--secondaryTextColor);
+  box-shadow: 0 3px 6px var(--shadowColor);
+}
+
+/* language selection box styling */
+.langSelect1 {
+  grid-area: langList1;
+  position: relative;
+  display: flex;
+  width: 350px;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+/* language selection drop down menu styling */
+.langSelect1 .options-container {
+  position: absolute;
+  background: var(--primaryBlue);
+  color: var(--primaryTextColor);
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+  order: 1;
+}
+
+/* language select styling */
+.selected {
+  background: var(--primaryBlue);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: #f5f6fa;
+  position: relative;
+  color: var(--primaryTextColor);
+  order: 0;
+}
+
+/* language select on hover effect */
+.selected:hover {
+  box-shadow: 1px 5px 15px 0 var(--shadowColor);
+}
+
+/* language select content style */
+.selected::after {
+  content: "";
+  background: url("img/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+  transition: all 0.4s;
+}
+
+/* language select content style */
+.langSelect1 .options-container.active {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+  margin-top: 103px;
+}
+
+/* on click effect for the drop down menu */
+.langSelect1 .options-container.active+.selected::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+/* scrollbar style for the dropdown menu */
+.langSelect1 .options-container::-webkit-scrollbar {
+  width: 8px;
+  background: var(--primaryBlue);
+  border-radius: 0 8px 8px 0;
+}
+
+/* scrollbar style for the dropdown menu */
+.langSelect1 .options-container::-webkit-scrollbar-thumb {
+  background: var(--shadowColor);
+  border-radius: 0 8px 8px 0;
+}
+
+/* language selection area styling */
+.langSelect1 .option,
+.selected {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+/* dropdown menu language hover effect */
+.langSelect1 .option:hover {
+  background: var(--shadowColor);
+}
+
+.langSelect1 label {
+  cursor: pointer;
+}
+
+.langSelect1 .option .radio {
+  display: none;
+}
+
+/* searchbox style */
+.search-box input {
+  width: auto;
+  padding: 12px 16px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  position: absolute;
+  border-radius: 8px 8px 0 0;
+  border: 8px solid var(--primaryBlue);
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s;
+}
+
+/* searchbox style */
+.search-box input:focus {
+  outline: none;
+}
+
+/* searchbox style */
+.langSelect1 .options-container.active~.search-box input {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* switch button style */
+.switchButton {
+  grid-area: switchButton;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-left: 80px;
+  transition-duration: 0.25s;
+}
+
+/* switch button style */
+#switchButton {
+  font-size: 2rem;
+  color: var(--primaryBlue);
+}
+
+/* switch button hover effect */
+#switchButton:hover {
+  font-size: 2.25rem;
+  color: var(--shadowColor);
+}
+
+/* switch button click effect */
+.switchButton.active {
+  transform: rotateY(180deg);
+}
+
+/* language selection box styling */
+.langSelect2 {
+  grid-area: langList2;
+  position: relative;
+  display: flex;
+  width: 350px;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+/* language selection drop down menu styling */
+.langSelect2 .options-container2 {
+  position: absolute;
+  background: var(--primaryBlue);
+  color: var(--primaryTextColor);
+  max-height: 0;
+  width: 100%;
+  opacity: 0;
+  transition: all 0.4s;
+  border-radius: 8px;
+  overflow: hidden;
+  order: 1;
+}
+
+/* language select styling */
+.selected2 {
+  background: var(--primaryBlue);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  color: var(--primaryTextColor);
+  position: relative;
+  order: 0;
+}
+
+/* language select on hover effect */
+.selected2:hover {
+  box-shadow: 1px 5px 15px 0 var(--shadowColor);
+}
+
+/* language select content style */
+.selected2::after {
+  content: "";
+  background: url("img/arrow-down.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: absolute;
+  height: 100%;
+  width: 32px;
+  right: 10px;
+  top: 5px;
+  transition: all 0.4s;
+}
+
+/* language select drop down menu effect */
+.langSelect2 .options-container2.active {
+  max-height: 240px;
+  opacity: 1;
+  overflow-y: scroll;
+  margin-top: 103px;
+}
+
+/* language select on click effect*/
+.langSelect2 .options-container2.active+.selected2::after {
+  transform: rotateX(180deg);
+  top: -6px;
+}
+
+/* language select scroll bar style */
+.langSelect2 .options-container2::-webkit-scrollbar {
+  width: 8px;
+  background: var(--primaryBlue);
+  border-radius: 0 8px 8px 0;
+}
+
+/* language select scroll bar style */
+.langSelect2 .options-container2::-webkit-scrollbar-thumb {
+  background: var(--shadowColor);
+  border-radius: 0 8px 8px 0;
+}
+
+/* language selection area styling */
+.langSelect2 .option2,
+.selected2 {
+  padding: 12px 24px;
+  cursor: pointer;
+}
+
+/* dropdown menu language hover effect */
+.langSelect2 .option2:hover {
+  background: var(--shadowColor);
+}
+
+.langSelect2 label {
+  cursor: pointer;
+}
+
+.langSelect2 .option2 .radio {
+  display: none;
+}
+
+
+/* searchbox style */
+.search-box2 input {
+  width: auto;
+  padding: 12px 16px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  position: absolute;
+  border-radius: 8px 8px 0 0;
+  border: 8px solid var(--primaryBlue);
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.4s;
+}
+
+/* searchbox style */
+.search-box2 input:focus {
+  outline: none;
+}
+
+/* searchbox style */
+.langSelect2 .options-container2.active~.search-box2 input {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* left text area style */
+.beforeArea {
+  resize: none;
+  width: 30rem;
+  height: 75%;
+  grid-area: beforeArea;
+  justify-self: center;
+  box-sizing: border-box;
+  border-color: var(--primaryBlue);
+  padding: 10px;
+  font-family: 'Monsteratt', sans-serif;
+  color: var(--textAreaColor);
+  font-size: 16px;
+  background-color: var(--textAreaBackground);
+}
+
+/* right text area style */
+.afterArea {
+  resize: none;
+  width: 30rem;
+  height: 75%;
+  grid-area: afterArea;
+  justify-self: center;
+  box-sizing: border-box;
+  border-color: var(--primaryBlue);
+  padding: 10px;
+  font-family: 'Monsteratt', sans-serif;
+  color: var(--textAreaColor);
+  font-size: 16px;
+  background-color: var(--textAreaBackground);
+}
+
+/* translate button style */
+.translateButton {
+  justify-self: center;
+  text-align: center;
+  grid-area: translateButton;
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-weight: 1rem;
+  font-size: 1rem;
+  height: 2.5rem;
+  width: 8rem;
+  background: var(--primaryBlue);
+  color: var(--primaryTextColor);
+  border: none;
+}
+
+/* translate button on hover effect */
+.translateButton:hover {
+  box-shadow: 1px 5px 15px 0 var(--shadowColor);
+}
+
+/* footer style */
+.footer {
+  grid-area: footer;
+  width: 100%;
+  border: 0;
+  font-size: small;
+  color: var(--secondaryTextColor);
+  box-shadow: 10px 10px 5px 10px var(--shadowColor);
+  padding: 0.5rem;
+  text-align: center;
+}
